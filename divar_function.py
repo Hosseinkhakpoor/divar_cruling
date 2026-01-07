@@ -1,5 +1,5 @@
-import requests,uuid
-
+import requests,uuid,os
+from dotenv import load_dotenv
 def get_number(token,authorization):
     contact_uuid = str(uuid.uuid4())
     url=f'https://api.divar.ir/v8/postcontact/web/contact_info_v2/{token}'
@@ -19,7 +19,8 @@ def get_number(token,authorization):
         phone_number=''
             
     return phone_number
-authorization="Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiJlYzExZmMyYS0zNTUyLTRjZDktYmU2OS1jNTQ4OTY5NmM2NjgiLCJ1aWQiOiIxMjUwZTJlNS01M2UyLTQxYjktOWQ1YS0wNmE0ZGRjNGQxY2QiLCJ1c2VyIjoiMDkxMjQxMzg1MzMiLCJ2ZXJpZmllZF90aW1lIjoxNzY3NzA2NDM1LCJpc3MiOiJhdXRoIiwidXNlci10eXBlIjoicGVyc29uYWwiLCJ1c2VyLXR5cGUtZmEiOiLZvtmG2YQg2LTYrti124wiLCJleHAiOjE3NzAyOTg0MzUsImlhdCI6MTc2NzcwNjQzNX0.8vZ0WdUl8N6BF6dcahSn0BqTz0nLEX-ttKaUmE74vYo"
+load_dotenv()
+authorization=os.getenv("authorization")
 token='gZn4ITPT'
 phon=get_number(token=token,authorization=authorization)
 print(phon)
