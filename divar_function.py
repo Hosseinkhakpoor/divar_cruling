@@ -28,7 +28,10 @@ def singin_user(phon_number):
     code=input("pleas enter activation code:  ")
     data={"phone":phon_number ,"code":code}
     res=requests.post(url,json=data,headers=headers)
-    authorization=f"Basic {res.json()['token']}"
+    if res.status_code==200:
+        authorization=f"Basic {res.json()['token']}"
+    else:
+        authorization='Basic '
     return authorization
 
 def serch_query(quary,city):
