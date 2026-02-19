@@ -8,7 +8,15 @@ def get_number(token,authorization):
     headers={'authorization':authorization,
          "content-type":"application/json"}
     res=requests.post(url,json=data,headers=headers)
-    js = res.json()
+    try:
+        js = res.json()
+    except:
+        print("STATUS:", res.status_code)
+        print(res.headers)
+        print(res.text)
+        return {
+            'status': 'Jwt is expired',
+            'phone': None}
     if 'hip_action' in js:
         return {
             'status': 'SECURITY_BLOCK',
@@ -236,6 +244,7 @@ def export_number(conn,authorization,phone_number_owner) :
                         break
                     else:
                         print(number_phon)
+                        print(f'number of phon_number export = {i}')
                 except:
                     print('Please solve CAPTCHA', f'\n token={token}')
                     break
